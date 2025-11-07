@@ -71,6 +71,30 @@ export class TreeService {
   }
 
   /**
+   * Find a node by id
+   * @param id
+   * @returns treeNodeResponseDto
+   */
+  async findNodeById(id: number): Promise<TreeNodeResponseDto> {
+    try {
+      const nodeFound = await this.treeNodeRepository.findOne({
+        where: {
+          id,
+        },
+        relations: ['children'],
+      });
+
+      if (!nodeFound) {
+        throw new NotFoundException(`Node with ID ${id} not found`);
+      }
+
+      return nodeFound;
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to retrieve node', error);
+    }
+  }
+
+  /**
    * This creates a new node and saves it to the database
    * @param createNodeDto
    * @returns treeNodeResponseDto

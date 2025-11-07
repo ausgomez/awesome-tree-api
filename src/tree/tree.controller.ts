@@ -41,6 +41,28 @@ export class TreeController {
   }
 
   // ============================================
+  // GET /api/tree/:id - Get all trees from database
+  // ============================================
+  @Get(':id')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({
+    summary: 'Get node by Id',
+    description: 'Find a node with their nested children',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Successfully retrieved the node',
+    type: [TreeNodeResponseDto],
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal server error',
+  })
+  async getNodeById(@Param('id') id: number): Promise<any> {
+    return this.treeService.findNodeById(id);
+  }
+
+  // ============================================
   // POST /api/tree - Create a new tree node and save it in the databse
   // ============================================
   @Post()

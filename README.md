@@ -47,7 +47,6 @@ Make sure you have these installed:
 
 You can find the complete list of endpoints by visiting `http://localhost:3000/api/docs`
 
-
 ## Testing the API
 You can try the endpoints using curl or other tools like Postman
 ### Get all trees
@@ -73,3 +72,5 @@ curl -X POST http://localhost:3000/api/tree \
 ```bash
 curl -X DELETE http://localhost:3000/api/tree/{id}
 ```
+
+# MCP Server Functions
