@@ -1,9 +1,11 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
+  Param,
   Post,
 } from '@nestjs/common';
 import { TreeService } from './tree.service';
@@ -70,5 +72,31 @@ export class TreeController {
     @Body() createNodeDto: CreateNodeDto,
   ): Promise<TreeNodeResponseDto> {
     return this.treeService.createNode(createNodeDto);
+  }
+
+  // ============================================
+  // DELETE /api/tree/:id - Create a new tree node by id
+  // ============================================
+  @Delete(':id')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({
+    summary: 'Deletes a node by id',
+    description:
+      'Finds and deletes a node and all their children from the database by ID',
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Invalid input data',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Node not found',
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal server error',
+  })
+  async deleteNodeById(@Param('id') id: number) {
+    return this.treeService.deleteNodeById(id);
   }
 }

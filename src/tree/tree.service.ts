@@ -113,4 +113,30 @@ export class TreeService {
       throw new InternalServerErrorException('Failed to create node', error);
     }
   }
+
+  /**
+   * Deletes a node by ID from the database
+   * @param nodeId
+   * @returns treeNodeResponseDto
+   */
+  async deleteNodeById(nodeId: number): Promise<TreeNodeResponseDto> {
+    try {
+      const node = await this.treeNodeRepository.findOne({
+        where: {
+          id: nodeId,
+        },
+      });
+
+      if (!node) {
+        throw new NotFoundException(`Node with ID ${nodeId} not found`);
+      }
+      await this.treeNodeRepository.delete(nodeId);
+      return node;
+    } catch (error) {
+      throw new NotFoundException(
+        `Failed to delete a node with ID ${nodeId}`,
+        error,
+      );
+    }
+  }
 }
