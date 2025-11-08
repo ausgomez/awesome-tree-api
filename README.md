@@ -73,4 +73,29 @@ curl -X POST http://localhost:3000/api/tree \
 curl -X DELETE http://localhost:3000/api/tree/{id}
 ```
 
-# MCP Server Functions
+# MCP Server
+
+I have implemented a small MCP server demo, which mimic the same functions as the RESTapi endpoints.
+These come in the format of tools, and they allow you to:
+- find-all-trees
+- create-new-node
+- find-node-by-id
+- delete-node-by-id
+
+To play with this functions, you would need to first run the server (following the steps above).
+Then while the server is running, open a new console and run the following command to open to use the MCP Inspector:
+```bash
+npx @modelcontextprotocol/inspector@0.16.2
+```
+
+Then a browser window will appear, make sure you have selected the following options:
+![MCP Inspector Settings](https://github.com/ausgomez/awesome-tree-api/blob/main/src/assets/mcp-settings-demo.png?raw=true "Optional title text on hover").
+
+Then click "Connect"
+
+Then on the "Tools" tab click on the "List tools" to list all the possible tools you can pick from.
+![MCP Inspector Playground](https://github.com/ausgomez/awesome-tree-api/blob/main/src/assets/mcp-demo.png?raw=true "Optional title text on hover").
+
+And there you go, you can play with those tools.
+
+Normally those tools would be ran by an MCP client like Claude Desktop, etc.
