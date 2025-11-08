@@ -6,22 +6,21 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { databaseConfig } from './config/database.config';
 import { McpModule } from '@rekog/mcp-nest';
-import { randomUUID } from 'crypto';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env' }),
     TypeOrmModule.forRoot(databaseConfig),
+    TreeModule,
     McpModule.forRoot({
       name: 'Awesome Tree Nodes MCP Server',
       version: '1.0.0',
       streamableHttp: {
-        enableJsonResponse: false,
-        sessionIdGenerator: () => randomUUID(),
-        statelessMode: false,
+        enableJsonResponse: true,
+        sessionIdGenerator: undefined,
+        statelessMode: true,
       },
     }),
-    TreeModule,
   ],
   controllers: [AppController],
   providers: [AppService],
